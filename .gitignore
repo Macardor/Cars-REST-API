@@ -1,0 +1,17 @@
+.idea/
+target/
+*.iml
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+# META-INF
+src/main/resources/META-INF/persistence.xml
+src/main/resources/META-INF/create-schema.ddl
+src/main/resources/META-INF/drop-schema.ddl
