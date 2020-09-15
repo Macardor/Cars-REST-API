@@ -5,6 +5,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import com.codecool.restapi.model.*;
+import com.google.gson.Gson;
 
 public class App {
     public static void main(String[] args) {
