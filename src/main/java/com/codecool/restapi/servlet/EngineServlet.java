@@ -22,7 +22,7 @@ public class EngineServlet extends HttpServlet {
     private Dao dao = new Dao();
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String url = getUrlFromRequest(request);
         String engineJsonString;
         long id;
@@ -44,21 +44,21 @@ public class EngineServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String engineJsonString = this.gson.toJson(getJsonStringFromRequest(request));
         Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
         dao.add(engine);
     }
 
     @Override
-    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String engineJsonString = this.gson.toJson(getJsonStringFromRequest(request));
         Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
         dao.update(engine);
     }
 
     @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
         String url = getUrlFromRequest(request);
 
         long id;
