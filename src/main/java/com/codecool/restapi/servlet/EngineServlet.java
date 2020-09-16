@@ -23,16 +23,12 @@ public class EngineServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String url = null;
-        url = (String) request.getAttribute("javax.servlet.forward.request_uri");
-        url = url == null ? request.getRequestURI() : url;
-        List<String> splittedUrl = Arrays.asList(url.split("/"));
-
+        String url = getUrlFromRequest(request);
         String engineJsonString;
         long id;
 
-        if(splittedUrl.size() == 4){
-            id = Long.parseLong(splittedUrl.get(3));
+        if(getIdFromURL(url) != 0L){
+            id = getIdFromURL(url);
             Engine engine = (Engine) dao.get(Engine.class, id);
             engineJsonString = this.gson.toJson(engine);
         }else{
@@ -49,21 +45,48 @@ public class EngineServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
-
-        BufferedReader bufferedReader = request.getReader();
-        while ((line = bufferedReader.readLine()) != null){
-            stringBuilder.append(line);
-        }
-
-        String engineJsonString = this.gson.toJson(stringBuilder.toString());
+        String engineJsonString = this.gson.toJson(getJsonStringFromRequest(request));
         Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
         dao.add(engine);
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String engineJsonString = this.gson.toJson(getJsonStringFromRequest(request));
+        Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
+        dao.update(engine);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        String url = getUrlFromRequest(request);
+
+        long id;
+
+        if(getIdFromURL(url) != 0L){
+            id = getIdFromURL(url);
+            dao.delete(Engine.class, id);
+        }else{
+            System.out.println("No id provided to delete record");
+        }
+    }
+
+    private String getUrlFromRequest(HttpServletRequest request){
+        String url = null;
+        url = (String) request.getAttribute("javax.servlet.forward.request_uri");
+        url = url == null ? request.getRequestURI() : url;
+        return url;
+    }
+
+    private long getIdFromURL(String url){
+        List<String> splittedUrl = Arrays.asList(url.split("/"));
+        if (splittedUrl.size() == 4){
+            return Long.parseLong(splittedUrl.get(3));
+        }
+        return 0L;
+    }
+
+    private String getJsonStringFromRequest(HttpServletRequest request) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
         String line = null;
 
@@ -71,27 +94,7 @@ public class EngineServlet extends HttpServlet {
         while ((line = bufferedReader.readLine()) != null){
             stringBuilder.append(line);
         }
-
-        String engineJsonString = this.gson.toJson(stringBuilder.toString());
-        Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
-        dao.update(engine, Engine.class);
-    }
-
-    @Override
-    protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-        String url = null;
-        url = (String) request.getAttribute("javax.servlet.forward.request_uri");
-        url = url == null ? request.getRequestURI() : url;
-        List<String> splittedUrl = Arrays.asList(url.split("/"));
-
-        long id;
-
-        if(splittedUrl.size() == 4){
-            id = Long.parseLong(splittedUrl.get(3));
-            dao.delete(Engine.class, id);
-        }else{
-            System.out.println("No id provided to delete record");
-        }
+        return stringBuilder.toString();
     }
 
 }
