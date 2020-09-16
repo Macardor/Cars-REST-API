@@ -1,9 +1,6 @@
 package com.codecool.restapi.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -15,7 +12,7 @@ public class Wheel {
     private float diameter;
     private float width;
 
-    @ManyToMany(mappedBy = "wheels")
+    @ManyToMany(mappedBy = "wheels", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     Set<Car> cars;
 
     public float getId() {
