@@ -72,7 +72,7 @@ public class EngineServlet extends HttpServlet {
     }
 
     private String getUrlFromRequest(HttpServletRequest request){
-        String url = null;
+        String url;
         url = (String) request.getAttribute("javax.servlet.forward.request_uri");
         url = url == null ? request.getRequestURI() : url;
         return url;
@@ -88,7 +88,7 @@ public class EngineServlet extends HttpServlet {
 
     private String getJsonStringFromRequest(HttpServletRequest request) throws IOException {
         StringBuilder stringBuilder = new StringBuilder();
-        String line = null;
+        String line;
 
         BufferedReader bufferedReader = request.getReader();
         while ((line = bufferedReader.readLine()) != null){
