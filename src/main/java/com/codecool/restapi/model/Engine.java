@@ -12,6 +12,15 @@ public class Engine {
     private float volume;
     private float torque;
 
+    public Engine(float volume, float torque){
+        this.volume = volume;
+        this.torque = torque;
+    }
+
+    public Engine(){
+
+    }
+
     @ManyToMany(mappedBy = "engines")
     Set<Car> cars;
 
