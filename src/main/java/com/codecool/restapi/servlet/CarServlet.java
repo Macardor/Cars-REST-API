@@ -2,7 +2,6 @@ package com.codecool.restapi.servlet;
 
 import com.codecool.restapi.dbconnection.Dao;
 import com.codecool.restapi.model.Car;
-import com.codecool.restapi.model.Engine;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
