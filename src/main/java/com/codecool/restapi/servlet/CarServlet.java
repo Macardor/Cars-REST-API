@@ -44,14 +44,14 @@ public class CarServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String carJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
         Car car = this.gson.fromJson(carJsonString, Car.class);
-        dao.add(car);
+        if (carHasAtLeastOneEngineAndWheelObject(car)) dao.add(car);
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String carJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
         Car car = this.gson.fromJson(carJsonString, Car.class);
-        dao.update(car);
+        if (carHasAtLeastOneEngineAndWheelObject(car)) dao.update(car);
     }
 
     @Override
@@ -62,6 +62,11 @@ public class CarServlet extends HttpServlet {
         }else{
             System.out.println("No id provided to delete record");
         }
+    }
+
+    private boolean carHasAtLeastOneEngineAndWheelObject(Car car) {
+        if (car.getEngines().size() == 0) return false;
+        return (car.getWheels().size() != 0);
     }
 
 }
