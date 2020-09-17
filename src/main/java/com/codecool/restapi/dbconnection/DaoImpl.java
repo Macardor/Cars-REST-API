@@ -43,12 +43,20 @@ public class DaoImpl<T> implements Dao<T> {
     }
 
     @Override
-    public void add(T objectToAdd) {
+    public void add(T object) {
         initEntityManager();
-        EntityTransaction transaction = entityManager.getTransaction();
-        transaction.begin();
-        entityManager.persist(objectToAdd);
-        transaction.commit();
+        try {
+            Field objectId = this.aClass.getDeclaredField("id");
+            objectId.setAccessible(true);
+            if (entityManager.find(this.aClass, objectId.get(object)) == null){
+                EntityTransaction transaction = entityManager.getTransaction();
+                transaction.begin();
+                entityManager.merge(object);
+                transaction.commit();
+            }
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
         closeManagers();
     }
 
