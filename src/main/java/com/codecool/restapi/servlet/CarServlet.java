@@ -3,55 +3,55 @@ package com.codecool.restapi.servlet;
 import com.codecool.restapi.dbconnection.Dao;
 import com.codecool.restapi.dbconnection.DaoImpl;
 import com.codecool.restapi.helpers.IdHandler;
-import com.codecool.restapi.model.Engine;
+import com.codecool.restapi.model.Car;
 import com.google.gson.Gson;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Arrays;
 import java.util.List;
 
-@WebServlet(name = "EngineServlet", urlPatterns = {"/engines", "/engines/*"})
-public class EngineServlet extends HttpServlet {
+@WebServlet(name = "CarServlet", urlPatterns = {"/cars", "/cars/*"})
+public class CarServlet extends HttpServlet {
 
     private Gson gson = new Gson();
-    private Dao<Engine> dao = new DaoImpl<>(Engine.class);
+    private Dao<Car> dao = new DaoImpl<>(Car.class);
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String engineJsonString;
+        String carJsonString;
         long id = IdHandler.getIdFromURL(request.getRequestURI());
+
         if(id != 0L){
-            Engine engine = dao.get(id);
-            engineJsonString = this.gson.toJson(engine);
+            Car car = dao.get(id);
+            carJsonString = this.gson.toJson(car);
         }else{
-            List<Engine> engines =  dao.getAll();
-            engineJsonString = this.gson.toJson(engines);
+            List<Car> cars =  dao.getAll();
+            carJsonString = this.gson.toJson(cars);
         }
+
         PrintWriter out = response.getWriter();
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
-        out.print(engineJsonString);
+        out.print(carJsonString);
         out.flush();
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String engineJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
-        Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
-        dao.add(engine);
+        String carJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
+        Car car = this.gson.fromJson(carJsonString, Car.class);
+        dao.add(car);
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String engineJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
-        Engine engine = this.gson.fromJson(engineJsonString, Engine.class);
-        dao.update(engine);
+        String carJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
+        Car car = this.gson.fromJson(carJsonString, Car.class);
+        dao.update(car);
     }
 
     @Override

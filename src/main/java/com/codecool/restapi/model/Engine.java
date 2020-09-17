@@ -21,7 +21,8 @@ public class Engine {
 
     }
 
-    @ManyToMany(mappedBy = "engines")
+    @ManyToMany(mappedBy = "engines", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @Transient
     Set<Car> cars;
 
     public long getId() {

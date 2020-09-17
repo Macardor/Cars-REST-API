@@ -4,8 +4,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+
 import com.codecool.restapi.model.*;
-import com.google.gson.Gson;
+
+import java.util.List;
 
 public class App {
     public static void main(String[] args) {
@@ -19,5 +21,6 @@ public class App {
         transaction.commit();
         em.close();
         emf.close();
+
     }
 }
