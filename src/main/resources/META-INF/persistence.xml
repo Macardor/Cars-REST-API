@@ -19,10 +19,6 @@
             <property name="javax.persistence.jdbc.user" value="yzvfxsjbyculqd"/>
             <property name="javax.persistence.jdbc.password" value="7fff7dfd01e945a7c1ee66f7f1cd230b7709aa5f463daff0719cbc0e6dc952ba"/>
             <!--<property name="javax.persistence.sql-load-script-source" value="insert.sql"/>-->
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>
-            <property name="javax.persistence.schema-generation.scripts.create-target" value="src/main/resources/META-INF/create-schema.ddl"/>
-            <property name="javax.persistence.schema-generation.scripts.drop-target" value="src/main/resources/META-INF/drop-schema.ddl"/>
         </properties>
     </persistence-unit>
 
