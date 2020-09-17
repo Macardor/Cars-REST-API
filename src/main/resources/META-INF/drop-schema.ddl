@@ -618,3 +618,25 @@
     drop table if exists Engine cascade
 
     drop table if exists Wheel cascade
+
+    alter table if exists Car_Engine 
+       drop constraint if exists FK70en9lfo5ocshv9schsbwob0g
+
+    alter table if exists Car_Engine 
+       drop constraint if exists FK9j06w1iu0v683xjgb3c7n1ku5
+
+    alter table if exists Car_Wheel 
+       drop constraint if exists FKr0uf6rvfq4a5e2viiyff7r1ms
+
+    alter table if exists Car_Wheel 
+       drop constraint if exists FKf8v411jurh1en05rd179xpsjv
+
+    drop table if exists Car cascade
+
+    drop table if exists Car_Engine cascade
+
+    drop table if exists Car_Wheel cascade
+
+    drop table if exists Engine cascade
+
+    drop table if exists Wheel cascade
