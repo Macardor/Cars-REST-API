@@ -13,14 +13,16 @@ public class Engine {
     private float volume;
     private float power;
     private float torque;
+    private float fuelUsage;
     private float emmision;
 
 
-    public Engine(String name, float volume, float power, float torque, float emmision){
+    public Engine(String name, float volume, float power, float torque, float fuelUsage, float emmision){
         this.name = name;
         this.volume = volume;
         this.power = power;
         this.torque = torque;
+        this.fuelUsage = fuelUsage;
         this.emmision = emmision;
     }
 
@@ -70,6 +72,14 @@ public class Engine {
 
     public void setTorque(float torque) {
         this.torque = torque;
+    }
+
+    public float getFuelUsage() {
+        return fuelUsage;
+    }
+
+    public void setFuelUsage(float fuelUsage) {
+        this.fuelUsage = fuelUsage;
     }
 
     public float getEmmision() {

@@ -15,7 +15,7 @@ public class App {
 
         EntityTransaction transaction = em.getTransaction();
         transaction.begin();
-        Car car = new Car("Fiat", 5.5f, 1300f);
+        Car car = new Car("Audi", "A1", "Sportback", 2020, 1190f);
         em.persist(car);
         transaction.commit();
         em.close();

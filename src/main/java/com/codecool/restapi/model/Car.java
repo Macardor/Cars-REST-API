@@ -13,7 +13,6 @@ public class Car {
     private String model;
     private String body;
     private int year;
-    private float fuelUsage;
     private float mass;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -25,12 +24,11 @@ public class Car {
     public Car() {
     }
 
-    public Car(String brand, String model, String body, int year, float fuelUsage, float mass) {
+    public Car(String brand, String model, String body, int year, float mass) {
         this.brand = brand;
         this.model = model;
         this.body = body;
         this.year = year;
-        this.fuelUsage = fuelUsage;
         this.mass = mass;
     }
 
@@ -72,14 +70,6 @@ public class Car {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-    public float getFuelUsage() {
-        return fuelUsage;
-    }
-
-    public void setFuelUsage(float fuelUsage) {
-        this.fuelUsage = fuelUsage;
     }
 
     public float getMass() {

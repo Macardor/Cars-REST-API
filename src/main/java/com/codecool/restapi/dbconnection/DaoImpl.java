@@ -115,7 +115,6 @@ public class DaoImpl<T> implements Dao<T> {
         for(float i=1f; i<21f; i = i + 1f) {
             Car car = new Car();
             car.setBrand("");
-            car.setFuelUsage(i);
             car.setMass(i * 200f + 1000f);
             Set<Engine> carEngines = new HashSet<>();
             Set<Wheel> carWheels = new HashSet<>();
