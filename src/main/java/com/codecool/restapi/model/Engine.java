@@ -13,6 +13,7 @@ public class Engine {
     private float volume;
     private float power;
     private float torque;
+    private float emmision;
 
 
     public Engine(float volume, float torque){
@@ -66,5 +67,13 @@ public class Engine {
 
     public void setTorque(float torque) {
         this.torque = torque;
+    }
+
+    public float getEmmision() {
+        return emmision;
+    }
+
+    public void setEmmision(float emmision) {
+        this.emmision = emmision;
     }
 }

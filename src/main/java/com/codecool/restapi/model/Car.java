@@ -13,7 +13,6 @@ public class Car {
     private String model;
     private String body;
     private int year;
-    private float emmision;
     private float fuelUsage;
     private float mass;
 
@@ -70,15 +69,6 @@ public class Car {
 
     public void setYear(int year) {
         this.year = year;
-    }
-
-
-    public float getEmmision() {
-        return emmision;
-    }
-
-    public void setEmmision(float emmision) {
-        this.emmision = emmision;
     }
 
     public float getFuelUsage() {
