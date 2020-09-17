@@ -49,4 +49,11 @@ public class Wheel {
         this.cars = cars;
     }
 
+    public String getTire() {
+        return tire;
+    }
+
+    public void setTire(String tire) {
+        this.tire = tire;
+    }
 }
