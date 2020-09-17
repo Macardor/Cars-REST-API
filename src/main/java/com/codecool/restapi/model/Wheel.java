@@ -17,6 +17,16 @@ public class Wheel {
     @Transient
     Set<Car> cars;
 
+    public Wheel(float diameter, float width, String tire){
+        this.diameter = diameter;
+        this.width = width;
+        this.tire = tire;
+    }
+
+    public Wheel(){
+
+    }
+
     public long getId() {
         return id;
     }

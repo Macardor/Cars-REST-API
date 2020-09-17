@@ -16,9 +16,12 @@ public class Engine {
     private float emmision;
 
 
-    public Engine(float volume, float torque){
+    public Engine(String name, float volume, float power, float torque, float emmision){
+        this.name = name;
         this.volume = volume;
+        this.power = power;
         this.torque = torque;
+        this.emmision = emmision;
     }
 
     public Engine(){

@@ -25,8 +25,11 @@ public class Car {
     public Car() {
     }
 
-    public Car(String brand, float fuelUsage, float mass) {
+    public Car(String brand, String model, String body, int year, float fuelUsage, float mass) {
         this.brand = brand;
+        this.model = model;
+        this.body = body;
+        this.year = year;
         this.fuelUsage = fuelUsage;
         this.mass = mass;
     }
