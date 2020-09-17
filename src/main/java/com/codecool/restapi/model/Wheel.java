@@ -7,19 +7,20 @@ import java.util.Set;
 public class Wheel {
 
     @Id
-    @GeneratedValue
-    private float id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     private float diameter;
     private float width;
 
     @ManyToMany(mappedBy = "wheels", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @Transient
     Set<Car> cars;
 
-    public float getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(float id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -38,4 +39,13 @@ public class Wheel {
     public void setWidth(float width) {
         this.width = width;
     }
+
+    public Set<Car> getCars() {
+        return cars;
+    }
+
+    public void setCars(Set<Car> cars) {
+        this.cars = cars;
+    }
+
 }

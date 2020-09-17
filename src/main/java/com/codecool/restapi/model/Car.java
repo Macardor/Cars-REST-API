@@ -13,10 +13,10 @@ public class Car {
     private float fuelUsage;
     private float mass;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Engine> engines;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Wheel> wheels;
 
     public Car() {
@@ -58,5 +58,21 @@ public class Car {
 
     public void setMass(float mass) {
         this.mass = mass;
+    }
+
+    public Set<Engine> getEngines() {
+        return engines;
+    }
+
+    public void setEngines(Set<Engine> engines) {
+        this.engines = engines;
+    }
+
+    public Set<Wheel> getWheels() {
+        return wheels;
+    }
+
+    public void setWheels(Set<Wheel> wheels) {
+        this.wheels = wheels;
     }
 }
