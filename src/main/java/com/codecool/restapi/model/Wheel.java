@@ -11,6 +11,7 @@ public class Wheel {
     private long id;
     private float diameter;
     private float width;
+    private String tire;
 
     @ManyToMany(mappedBy = "wheels", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     @Transient

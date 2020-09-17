@@ -7,7 +7,6 @@ import javax.persistence.Persistence;
 
 import com.codecool.restapi.model.*;
 
-import java.util.List;
 
 public class App {
     public static void main(String[] args) {

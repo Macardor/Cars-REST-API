@@ -9,8 +9,11 @@ public class Engine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private String name;
     private float volume;
+    private float power;
     private float torque;
+
 
     public Engine(float volume, float torque){
         this.volume = volume;
@@ -33,12 +36,28 @@ public class Engine {
         this.id = id;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public float getVolume() {
         return volume;
     }
 
     public void setVolume(float volume) {
         this.volume = volume;
+    }
+
+    public float getPower() {
+        return power;
+    }
+
+    public void setPower(float power) {
+        this.power = power;
     }
 
     public float getTorque() {
