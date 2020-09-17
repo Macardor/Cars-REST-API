@@ -12,3 +12,6 @@ target/
 .history/
 
 # META-INF
+src/main/resources/META-INF/persistence.xml
+src/main/resources/META-INF/create-schema.ddl
+src/main/resources/META-INF/drop-schema.ddl
