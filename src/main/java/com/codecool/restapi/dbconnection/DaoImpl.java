@@ -109,21 +109,29 @@ public class DaoImpl<T> implements Dao<T> {
         ArrayList<Engine> engines = new ArrayList<>();
         ArrayList<Wheel> wheels = new ArrayList<>();
         for(float i=1f; i<21f; i = i + 1f) {
-            Engine engine = new Engine();
-            engine.setVolume(i);
-            engine.setTorque(i);
-            engines.add(engine);
-
-            Wheel wheel = new Wheel();
-            wheel.setDiameter(i);
-            wheel.setWidth(i);
-            wheels.add(wheel);
+            int z = (int) i;
+            String engineName = "E";
+            String wheelName = "W";
+            for (int om = 0; om < z; om++) {
+                engineName += "E";
+                wheelName += "W";
+            }
+            engines.add(new Engine(engineName, i, i, i, i, i));
+            wheels.add(new Wheel(i, i, wheelName));
 
         }
         for(float i=1f; i<21f; i = i + 1f) {
-            Car car = new Car();
-            car.setBrand("");
-            car.setMass(i * 200f + 1000f);
+            int z = (int) i;
+            String engineName = "E";
+            String wheelName = "W";
+            for (int om = 0; om < z; om++) {
+                engineName += "E";
+                wheelName += "W";
+            }
+            String body = engineName+wheelName;
+
+            Car car = new Car(engineName, wheelName, body, (int) (i + 2000f), i * 200f + 1000f);
+
             Set<Engine> carEngines = new HashSet<>();
             Set<Wheel> carWheels = new HashSet<>();
             int j = (int) i - 1;
@@ -132,6 +140,7 @@ public class DaoImpl<T> implements Dao<T> {
             if (j > 19) j = j - 20;
             if (k > 19) k = k - 20;
             if (l > 19) l = l - 20;
+
             carEngines.add(engines.get(j));
             carWheels.add(wheels.get(j));
             carEngines.add(engines.get(k));
@@ -140,6 +149,7 @@ public class DaoImpl<T> implements Dao<T> {
             carWheels.add(wheels.get(l));
             car.setWheels(carWheels);
             car.setEngines(carEngines);
+
             cars.add(car);
         }
 
