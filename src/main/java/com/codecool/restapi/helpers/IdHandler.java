@@ -3,9 +3,11 @@ package com.codecool.restapi.helpers;
 import com.codecool.restapi.model.Wheel;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IdHandler {
 
@@ -27,6 +29,16 @@ public class IdHandler {
     }
 
     public static String getJsonStringFromRequest(HttpServletRequest request) throws IOException {
-        return request.getHeader("jsonObject");
+        String line;
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            BufferedReader bufferedReader = request.getReader();
+            while ((line = bufferedReader.readLine()) != null)
+                stringBuilder.append(line);
+        } catch (Exception e) { e.printStackTrace(); }
+        List<String> splittedString = Arrays.asList(stringBuilder.toString().split(" "));
+        //Print json string
+        System.out.println(String.join("", splittedString));
+        return String.join("", splittedString);
     }
 }
