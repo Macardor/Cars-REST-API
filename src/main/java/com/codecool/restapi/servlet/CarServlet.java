@@ -25,7 +25,7 @@ public class CarServlet extends HttpServlet {
         String carJsonString;
         long id = IdHandler.getIdFromURL(request.getRequestURI());
 
-        if(id != 0L){
+        if(IdHandler.providedIdIsProper(id)){
             Car car = dao.get(id);
             carJsonString = this.gson.toJson(car);
         }else{
@@ -42,25 +42,32 @@ public class CarServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String carJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
-        Car car = this.gson.fromJson(carJsonString, Car.class);
+        Car car = this.gson.fromJson(IdHandler.getJsonStringFromRequest(request), Car.class);
         if (carHasAtLeastOneEngineAndWheelObject(car)) dao.add(car);
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        String carJsonString = this.gson.toJson(IdHandler.getJsonStringFromRequest(request));
-        Car car = this.gson.fromJson(carJsonString, Car.class);
-        if (carHasAtLeastOneEngineAndWheelObject(car)) dao.update(car);
+        Car car = this.gson.fromJson(IdHandler.getJsonStringFromRequest(request), Car.class);
+        long id = IdHandler.getIdFromURL(request.getRequestURI());
+        if(IdHandler.providedIdIsProperAndEquals(id, car.getId())){
+            if (carHasAtLeastOneEngineAndWheelObject(car)) dao.update(car);
+        }else{
+            System.out.println("\n\n#################################\n");
+            System.out.println("No proper id provided to update record");
+            System.out.println("\n#################################\n\n");
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) {
         long id = IdHandler.getIdFromURL(request.getRequestURI());
-        if(id != 0L){
+        if(IdHandler.providedIdIsProper(id)){
             dao.delete(id);
         }else{
+            System.out.println("\n\n#################################\n");
             System.out.println("No id provided to delete record");
+            System.out.println("\n#################################\n\n");
         }
     }
 
