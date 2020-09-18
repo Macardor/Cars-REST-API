@@ -1,5 +1,8 @@
 package com.codecool.restapi.model;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -15,10 +18,10 @@ public class Car {
     private int year;
     private float mass;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Engine> engines;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private Set<Wheel> wheels;
 
     public Car() {
