@@ -106,8 +106,8 @@ public class DaoImpl<T> implements Dao<T> {
 
     public static void initRecordsInDatabase() {
         List<Car> cars = new ArrayList<>();
-        ArrayList<Engine> engines = new ArrayList<>();
-        ArrayList<Wheel> wheels = new ArrayList<>();
+        List<Engine> engines = new ArrayList<>();
+        List<Wheel> wheels = new ArrayList<>();
         for(float i=1f; i<21f; i = i + 1f) {
             int z = (int) i;
             String engineName = "E";
@@ -118,8 +118,15 @@ public class DaoImpl<T> implements Dao<T> {
             }
             engines.add(new Engine(engineName, i, i, i, i, i));
             wheels.add(new Wheel(i, i, wheelName));
-
         }
+
+        Dao<Engine> engineDao = new DaoImpl<>(Engine.class);
+        Dao<Wheel> wheelDao = new DaoImpl<>(Wheel.class);
+        engines.forEach(engineDao::add);
+        wheels.forEach(wheelDao::add);
+
+        engines = engineDao.getAll();
+        wheels = wheelDao.getAll();
         for(float i=1f; i<21f; i = i + 1f) {
             int z = (int) i;
             String engineName = "E";
@@ -153,12 +160,7 @@ public class DaoImpl<T> implements Dao<T> {
             cars.add(car);
         }
 
-        Dao<Engine> engineDao = new DaoImpl<>(Engine.class);
-        Dao<Wheel> wheelDao = new DaoImpl<>(Wheel.class);
         Dao<Car> carDao = new DaoImpl<>(Car.class);
-
-        engines.forEach(engineDao::add);
-        wheels.forEach(wheelDao::add);
         cars.forEach(carDao::add);
 
     }
