@@ -15,8 +15,8 @@ public class IdHandler {
         return id != 0L;
     }
 
-    public static boolean providedIdIsProper(long id, Wheel wheel) {
-        if (wheel.getId() != id) return false;
+    public static boolean providedIdIsProperAndEquals(long id, long objectId) {
+        if (objectId != id) return false;
         return providedIdIsProper(id);
     }
 
@@ -38,7 +38,9 @@ public class IdHandler {
         } catch (Exception e) { e.printStackTrace(); }
         List<String> splittedString = Arrays.asList(stringBuilder.toString().split(" "));
         //Print json string
+        System.out.println("\n\n#########################################\n");
         System.out.println(String.join("", splittedString));
+        System.out.println("\n#########################################\n\n");
         return String.join("", splittedString);
     }
 }

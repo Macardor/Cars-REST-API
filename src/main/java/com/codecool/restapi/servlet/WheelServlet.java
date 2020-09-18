@@ -54,7 +54,7 @@ public class WheelServlet extends HttpServlet {
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws IOException {
         Wheel wheel = this.gson.fromJson(IdHandler.getJsonStringFromRequest(request), Wheel.class);
         long id = IdHandler.getIdFromURL(request.getRequestURI());
-        if(IdHandler.providedIdIsProper(id, wheel)){
+        if(IdHandler.providedIdIsProperAndEquals(id, wheel.getId())){
             dao.update(wheel);
         }else{
             System.out.println("\n\n#################################\n");
